@@ -1,4 +1,12 @@
-import kaggle
-kaggle.api.authenticate()
-# kaggle.api.dataset_download_files('xhlulu/vinbigdata-chest-xray-resized-png-256x256', path='./data/raw/vinbigdata', unzip=True)
-kaggle.api.dataset_download_files('soumikrakshit/github-chats', path='./data/test', unzip=True)
+from pathlib import Path
+
+DATASETS = {
+    "vinbigdata": {
+            "kaggle_key": "xhlulu/vinbigdata-chest-xray-resized-png-256x256",
+            "dest": "data/raw/vinbigdata",      
+    }
+}
+    
+ROOT = Path(__file__).resolve().parents[2] # project root
+dest = ROOT / DATASETS["vinbigdata"]["dest"]
+print(any(dest.iterdir() if dest.exists() else []))
